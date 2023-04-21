@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+    <title>Registro de Usuario</title>
+</h:head>
+	
+<h:body>
+	<h1>Registrarse</h1>
+    <h:form>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <td> <h:inputText id="nombre" value="#{registroBean.nombre}" required="true" requiredMessage="Campo obligatorio." /></td>
+            </tr>
+            <tr>
+                <th>Apellido</th>
+                <td> <h:inputText id="apellido" value="#{registroBean.apellido}" required="true" requiredMessage="Campo obligatorio." /></td>
+            </tr>
+             <tr>
+                <th>DNI</th>
+                <td> <h:inputText id="dni" value="#{registroBean.dni}" /></td>
+            </tr>
+             <tr>
+                <th>correo</th>
+                <td> <h:inputText id="correo" value="#{registroBean.correo}" /></td>
+            </tr>
+            <tr>
+                <th>username</th>
+                <td> <h:inputText id="username" value="#{registroBean.login}" required="true" requiredMessage="Campo obligatorio." /></td>
+            </tr>
+             <tr>
+                <th>contraseña</th>
+                <td> <h:inputText id="contraseña" value="#{registroBean.contraseña}" required="true" requiredMessage="Campo obligatorio." /></td>
+            </tr>
+             <tr>
+                <th>Cliente o Trabajador</th>
+                <td> <h:inputText id="tipo" value="#{registroBean.tipo}" required="true" requiredMessage="Campo obligatorio." /></td>
+            </tr>
+        </table>
+    </h:form>
+    <form action="login.xhtml" actionlistener="#{registroBean.registrar}" method="post">
+    	<input type="submit" value="Registrarse" class="btn"> </input>
+    </form>
+</h:body>
+</html>

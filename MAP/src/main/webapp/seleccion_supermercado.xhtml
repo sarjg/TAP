@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+ 
+    <h:head>
+        <title>Selección de supermercado</title>
+    </h:head>
+        <h:body>
+    	<h:form>            
+            <h:outputLabel for="supermercado" value="Selecciona tu supermercado:" />
+            <h:selectOneMenu id="supermercado" value="#{seleccionSupermercadoBean.supermercadoSeleccionado}" >
+            	<f:selectItems value="#{seleccionSupermercadoBean.nombreSupermercados}" />
+            </h:selectOneMenu>
+        </h:form>
+        <form action="buscar_producto.xhtml" method="post">
+    			<input type="submit" value="Siguente" class="btn"> </input>
+    		</form>
+    </h:body>
+    
+</html>

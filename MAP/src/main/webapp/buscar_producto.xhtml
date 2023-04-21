@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/html"> 
+
+<h:head>
+    <title>Buscar Producto</title>
+</h:head>
+<h:body>
+	<h1>Bienvenido!</h1>
+    <h2>Estas en el supermercado de #{buscarProductoBean.nombreSupermercado}</h2>		
+	<p>Introduzca el producto que desa buscar</p>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Producto:" />
+            <p:inputText id="producto" value="#{buscarProductoBean.nombreProducto}" required="true" requiredMessage="Debe introducir un producto" />
+            <p:commandButton value="Buscar" action="#{buscarProductoBean.buscarProducto}" ajax="false" />
+       </h:panelGrid>
+    </h:form>    
+    <p:panelGrid columns="1" >
+     <!--  <h:graphicImage value="#{buscarProductoBean.cargarImagen}" alt="#{buscarProductoBean.nombreProducto}" /> -->
+    </p:panelGrid>
+    
+    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+</h:body>
+</html>
