@@ -29,7 +29,7 @@ public class SupermercadoImp {
         List<Supermercado> supermercados = obtenerSupermercados();
         List<String> nombres = new ArrayList<>();
         for (Supermercado s : supermercados) {
-            nombres.add(s.getNombre());
+            nombres.add(s.getDireccion());
         }
         return nombres;
     }

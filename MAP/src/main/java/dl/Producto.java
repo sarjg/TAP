@@ -18,14 +18,9 @@ public class Producto implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idProductos;
 
-	private String imagen;
-
 	private String nombre;
 
 	private float precio;
-
-	@Column(name="TiposS_idTiposS")
-	private int tiposS_idTiposS;
 
 	//uni-directional many-to-one association to Supermercado
 	@ManyToOne
@@ -38,10 +33,8 @@ public class Producto implements Serializable {
 	public Producto(int idProductos, String imagen, String nombre, float precio, int tiposS_idTiposS) {
 		super();
 		this.idProductos = idProductos;
-		this.imagen = imagen;
 		this.nombre = nombre;
 		this.precio = precio;
-		this.tiposS_idTiposS = tiposS_idTiposS;
 	}
 
 	public int getIdProductos() {
@@ -50,14 +43,6 @@ public class Producto implements Serializable {
 
 	public void setIdProductos(int idProductos) {
 		this.idProductos = idProductos;
-	}
-
-	public String getImagen() {
-		return this.imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
 	}
 
 	public String getNombre() {
@@ -76,13 +61,6 @@ public class Producto implements Serializable {
 		this.precio = precio;
 	}
 
-	public int getTiposS_idTiposS() {
-		return this.tiposS_idTiposS;
-	}
-
-	public void setTiposS_idTiposS(int tiposS_idTiposS) {
-		this.tiposS_idTiposS = tiposS_idTiposS;
-	}
 
 	public Supermercado getSupermercado() {
 		return this.supermercado;

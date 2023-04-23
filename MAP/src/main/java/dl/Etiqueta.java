@@ -20,8 +20,6 @@ public class Etiqueta implements Serializable {
 
 	private int estanteria;
 
-	private String mapaFoto;
-
 	private int pasillo;
 
 	//uni-directional many-to-one association to Producto
@@ -62,14 +60,6 @@ public class Etiqueta implements Serializable {
 
 	public void setEstanteria(int estanteria) {
 		this.estanteria = estanteria;
-	}
-
-	public String getMapaFoto() {
-		return this.mapaFoto;
-	}
-
-	public void setMapaFoto(String mapaFoto) {
-		this.mapaFoto = mapaFoto;
 	}
 
 	public int getPasillo() {

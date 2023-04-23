@@ -9,9 +9,9 @@
     <title>Buscar Producto</title>
 </h:head>
 <h:body>
-	<h1>Bienvenido!</h1>
-    <h2>Estas en el supermercado de Eroski #{buscarProductoBean.nombreSupermercado}</h2>		
-	<p>Introduzca el producto que desa buscar</p>
+    <h1>Bienvenido!</h1>
+    <h2>Estas en el supermercado Eroski San Mames #{buscarProductoBean.nombreSupermercado}</h2>        
+    <p>Introduzca el producto que desea buscar</p>
     <h:form>
         <h:panelGrid columns="2">
             <h:outputLabel value="Producto:" />
@@ -20,23 +20,43 @@
        </h:panelGrid>
     </h:form>    
     #{buscarProductoBean.warn}
-	
-	<h:panelGroup rendered="#{not empty buscarProductoBean.producto}">
-    <h:dataTable value="#{buscarProductoBean.producto}" var="producto">
-        <h:column>
-            <f:facet name="header">Nombre</f:facet>
-            #{producto.nombre}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Precio</f:facet>
-            #{producto.precio}
-        </h:column>
-    </h:dataTable>
-</h:panelGroup>
+    #{buscarProductoBean.pasillo}
+    #{buscarProductoBean.estanteria}
+    <h:panelGroup rendered="#{not empty buscarProductoBean.producto}">
+        <h:dataTable value="#{buscarProductoBean.producto}" var="producto">
+            <h:column>
+                <f:facet name="header">Nombre</f:facet>
+                #{producto.nombre}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Precio</f:facet>
+                #{producto.precio}
+            </h:column>
+        </h:dataTable>
+        <div>
+            <img id='theImg' src='https://folio-uploads-pro.s3.eu-west-1.amazonaws.com/wp-content/uploads/sites/871/2021/02/26170509/Artboard-1.jpg'></img>
+            <canvas id='myCanvas' width='536px' height='536px'></canvas>
+            <script>
+                function Draw() {
+                    var img = document.getElementById("theImg");
+                    var cnvs = document.getElementById("myCanvas");
+                    cnvs.style.position = "absolute";
+                    cnvs.style.left = img.offsetLeft + "px";
+                    cnvs.style.top = img.offsetTop + "px";
 
-
-    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    var ctx = cnvs.getContext("2d");
+                    ctx.beginPath();            
+                    ctx.arc(#{buscarProductoBean.pasillo}, #{buscarProductoBean.estanteria}, 10, 0, 2 * Math.PI); // x, y y radio
+                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = '#5c92ff';
+                    ctx.stroke();
+                    ctx.fillStyle = 'rgba(0, 150, 255, 0.5)';
+                    ctx.fill();
+                }
+                Draw();
+            </script>
+        </div>
+    </h:panelGroup>
 </h:body>
 </html>
-
 
