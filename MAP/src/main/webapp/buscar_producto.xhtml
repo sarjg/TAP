@@ -10,7 +10,7 @@
 </h:head>
 <h:body>
 	<h1>Bienvenido!</h1>
-    <h2>Estas en el supermercado de #{buscarProductoBean.nombreSupermercado}</h2>		
+    <h2>Estas en el supermercado de Eroski #{buscarProductoBean.nombreSupermercado}</h2>		
 	<p>Introduzca el producto que desa buscar</p>
     <h:form>
         <h:panelGrid columns="2">
@@ -19,10 +19,24 @@
             <p:commandButton value="Buscar" action="#{buscarProductoBean.buscarProducto}" ajax="false" />
        </h:panelGrid>
     </h:form>    
-    <p:panelGrid columns="1" >
-     <!--  <h:graphicImage value="#{buscarProductoBean.cargarImagen}" alt="#{buscarProductoBean.nombreProducto}" /> -->
-    </p:panelGrid>
-    
+    #{buscarProductoBean.warn}
+	
+	<h:panelGroup rendered="#{not empty buscarProductoBean.producto}">
+    <h:dataTable value="#{buscarProductoBean.producto}" var="producto">
+        <h:column>
+            <f:facet name="header">Nombre</f:facet>
+            #{producto.nombre}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Precio</f:facet>
+            #{producto.precio}
+        </h:column>
+    </h:dataTable>
+</h:panelGroup>
+
+
     <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 </h:body>
 </html>
+
+

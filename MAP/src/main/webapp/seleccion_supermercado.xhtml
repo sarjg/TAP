@@ -13,10 +13,8 @@
             <h:selectOneMenu id="supermercado" value="#{seleccionSupermercadoBean.supermercadoSeleccionado}" >
             	<f:selectItems value="#{seleccionSupermercadoBean.nombreSupermercados}" />
             </h:selectOneMenu>
+            <h:commandButton action="buscar_producto.xhtml" actionListener="#{buscarProductoBean.setNombreSupermercado(seleccionSupermercadoBean.supermercadoSeleccionado)}" id="submit" value="Siguente" />            
         </h:form>
-        <form action="buscar_producto.xhtml" method="post">
-    			<input type="submit" value="Siguente" class="btn"> </input>
-    		</form>
     </h:body>
     
 </html>

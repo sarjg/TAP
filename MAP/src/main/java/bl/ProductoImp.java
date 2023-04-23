@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -35,9 +38,19 @@ public class ProductoImp {
     }
 
     public Producto obtenerProductoPorNombre(String nombre) {
-        return (Producto) em.createQuery("SELECT p FROM Producto p WHERE p.nombre LIKE :nombre", Producto.class)
-            .setParameter("nombre", nombre).getResultStream();
+        Producto producto = null;
+        try {
+            producto = em.createQuery("SELECT p FROM Producto p WHERE p.nombre LIKE :nombre", Producto.class)
+                .setParameter("nombre", nombre)
+                .getSingleResult();//solo un producto
+        } catch (NoResultException e) {
+            // No se encontró ninguna entidad que cumpla con los criterios de búsqueda
+            // Seteamos el producto a null y mostramos un mensaje de error al usuario 
+            producto = null;
+        }
+        return producto;
     }
+
 
     public List<Producto> obtenerProductosPorTipo(int idTipo) {
         return em.createQuery("SELECT p FROM Producto p WHERE p.tipo.id = :idTipo", Producto.class)

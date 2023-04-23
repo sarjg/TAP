@@ -4,18 +4,13 @@ package pl;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
-import javax.imageio.ImageIO;
 import javax.inject.Named;
 //mport org.primefaces.model.DefaultStreamedContent;
 //import org.primefaces.model.StreamedContent;
 
 import bl.ProductoImp;
-import bl.SupermercadoImp;
 import dl.Producto;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 
 @Named
@@ -27,10 +22,10 @@ public class BuscarProductoBean implements Serializable {
     private ProductoImp prodi;
     
     private String nombreProducto;
-    private String nombreSupermercado = "Eroski";
+    private String rend;
+    private String warn;
+    private String nombreSupermercado;
     private Producto producto;
-  //  private StreamedContent imagenProducto;
- //   private String imagenProducto;
     
     @PostConstruct
     public void init() {
@@ -38,34 +33,13 @@ public class BuscarProductoBean implements Serializable {
     }
 
     public void buscarProducto() {
-        producto = prodi.obtenerProductoPorNombre(nombreProducto);
-        this.nombreProducto = producto.getNombre();
-    }
-    
-    public BufferedImage cargarImagen(String ruta) throws IOException {
-		return null;
-        /*File archivoImagen = new File(ruta);
-        if (archivoImagen.exists()) {
-            BufferedImage imagen = ImageIO.read(archivoImagen);
-            return imagen;
+        producto = prodi.obtenerProductoPorNombre(nombreProducto); // devuelve el producto buscado ERROR?
+        if (producto != null) {
+        	setWarn("Producto encontrado!");
         } else {
-            System.out.println("La imagen no existe en la ruta especificada.");
-            return null;
-        }*/
-    }
-
-
-    
-  /*  public void cargarNombreSupermercado() {
-    	this.nombreSupermercado = superb.getSupermercadoSeleccionado();
-    }*/
-
-    public void reset() {
-        nombreProducto = null;
-        nombreSupermercado = null;
-        producto = null;
-//        imagenProducto = null;
-    }
+        	setWarn("Producto no encontrado, intentelo otra vez");
+        }
+    }    
 
     public String getNombreProducto() {
         return nombreProducto;
@@ -91,14 +65,23 @@ public class BuscarProductoBean implements Serializable {
         this.producto = producto;
     }
 
- /*   public StreamedContent getImagenProducto() {
-        return imagenProducto;
-    }
+	public String getRend() {
+		return rend;
+	}
 
-    public void setImagenProducto(StreamedContent imagenProducto) {
-        this.imagenProducto = imagenProducto;
-    }
-*/
+	public void setRend(String rend) {
+		this.rend = rend;
+	}
+
+
+	public String getWarn() {
+		return warn;
+	}
+
+	public void setWarn(String warn) {
+		this.warn = warn;
+	}
+
 }
     
 
