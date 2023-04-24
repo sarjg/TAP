@@ -36,6 +36,7 @@ public class BuscarProductoBean implements Serializable {
     @PostConstruct
     public void init() {
 //    	cargarNombreSupermercado();
+    	
     }
 
     public void buscarProducto() {

@@ -10,18 +10,18 @@
 </h:head>
 <h:body>
     <h1>Bienvenido!</h1>
-    <h2>Estas en el supermercado Eroski San Mames #{buscarProductoBean.nombreSupermercado}</h2>        
+    <h2>Estas en el supermercado Eroski #{buscarProductoBean.nombreSupermercado}</h2>        
     <p>Introduzca el producto que desea buscar</p>
     <h:form>
         <h:panelGrid columns="2">
             <h:outputLabel value="Producto:" />
             <p:inputText id="producto" value="#{buscarProductoBean.nombreProducto}" required="true" requiredMessage="Debe introducir un producto" />
-            <p:commandButton value="Buscar" action="#{buscarProductoBean.buscarProducto}" ajax="false" />
+            <p:commandButton value="Buscar" action="#{buscarProductoBean.buscarProducto}" id="submit4" ajax="false" />
+      		<p:commandButton value="Volver" action="seleccion_supermercado" id="submit3" ajax="false"/>
        </h:panelGrid>
     </h:form>    
     #{buscarProductoBean.warn}
-    #{buscarProductoBean.pasillo}
-    #{buscarProductoBean.estanteria}
+    <br/>
     <h:panelGroup rendered="#{not empty buscarProductoBean.producto}">
         <h:dataTable value="#{buscarProductoBean.producto}" var="producto">
             <h:column>
@@ -34,7 +34,7 @@
             </h:column>
         </h:dataTable>
         <div>
-            <img id='theImg' src='https://folio-uploads-pro.s3.eu-west-1.amazonaws.com/wp-content/uploads/sites/871/2021/02/26170509/Artboard-1.jpg'></img>
+            <img id='theImg' src="Plano supermercado-Modelo.jpg" height="500"></img>
             <canvas id='myCanvas' width='536px' height='536px'></canvas>
             <script>
                 function Draw() {
@@ -47,6 +47,7 @@
                     var ctx = cnvs.getContext("2d");
                     ctx.beginPath();            
                     ctx.arc(#{buscarProductoBean.pasillo}, #{buscarProductoBean.estanteria}, 10, 0, 2 * Math.PI); // x, y y radio
+                   // ctx.arc(500, 375, 10, 0, 2 * Math.PI); // x, y y radio
                     ctx.lineWidth = 2;
                     ctx.strokeStyle = '#5c92ff';
                     ctx.stroke();
@@ -56,7 +57,7 @@
                 Draw();
             </script>
         </div>
-    </h:panelGroup>
+    </h:panelGroup> 
 </h:body>
 </html>
 
