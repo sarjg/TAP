@@ -40,7 +40,7 @@ public class BuscarProductoBean implements Serializable {
     }
 
     public void buscarProducto() {
-        producto = prodi.obtenerProductoPorNombre(nombreProducto); // devuelve el producto buscado ERROR?
+        producto = prodi.obtenerProductoPorNombre(nombreProducto); // devuelve el producto buscado 
         if (producto != null) {
         	setWarn("Producto encontrado!");
         Etiqueta etiqueta = eti.obtenerEtiquetaPorId(producto.getIdProductos()); //idprod y idetiqueta son iguales

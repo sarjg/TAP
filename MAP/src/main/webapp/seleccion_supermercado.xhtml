@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/html"> 
  
     <h:head>
         <title>Selección de supermercado</title>
@@ -16,6 +17,11 @@
             <h:commandButton action="buscar_producto.xhtml" actionListener="#{buscarProductoBean.setNombreSupermercado(seleccionSupermercadoBean.supermercadoSeleccionado)}" id="submit" value="Siguente" />
             <h:commandButton action="login" id="submit2" value="Volver" />            
         </h:form>
+            <h:form>
+    	   <h:panelGrid>
+        		<p:commandButton value="Cerrar sesion" action="#{loginBean.doLogout()}" id="submit6" ajax="false"/>
+           </h:panelGrid>
+    </h:form>
     </h:body>
     
 </html>

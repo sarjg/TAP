@@ -1,11 +1,13 @@
 package bl;
 
-import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import dl.Adiminstrador;
 
@@ -16,8 +18,28 @@ public class AdministradorImp{
     @PersistenceContext //crear y adminisntrar las instancias del entinty
     private EntityManager entityManager; //interactuar con la base de datos
 
-    public List<Adiminstrador> obtenerAdministradores() {
-        return entityManager.createQuery("SELECT a FROM Administrador a", Adiminstrador.class).getResultList();
+
+    public Adiminstrador findByUsernameAndPassword(String login, String contraseña) {
+        TypedQuery<Adiminstrador> query = entityManager.createQuery("SELECT a FROM Adiminstrador a WHERE a.login = :login AND a.contraseña = :contraseña", Adiminstrador.class);
+        query.setParameter("login", login);
+        query.setParameter("contraseña", contraseña);
+        
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
+    public Adiminstrador findByUsername(String login) {
+        Query query = entityManager.createQuery("SELECT u FROM Adiminstrador u WHERE u.login = :login");
+        query.setParameter("login", login);
+        
+        try {   
+            return (Adiminstrador) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } 
     }
 
     public Adiminstrador obtenerAdministradorPorId(int id) {

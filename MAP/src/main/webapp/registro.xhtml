@@ -1,49 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
-    <title>Registro de Usuario</title>
+    <title>Registro</title>
 </h:head>
-	
 <h:body>
-	<h1>Registrarse</h1>
     <h:form>
-        <table>
-            <tr>
-                <th>Nombre</th>
-                <td> <h:inputText id="nombre" value="#{registroBean.nombre}" required="true" requiredMessage="Campo obligatorio." /></td>
-            </tr>
-            <tr>
-                <th>Apellido</th>
-                <td> <h:inputText id="apellido" value="#{registroBean.apellido}" required="true" requiredMessage="Campo obligatorio." /></td>
-            </tr>
-             <tr>
-                <th>DNI</th>
-                <td> <h:inputText id="dni" value="#{registroBean.dni}" /></td>
-            </tr>
-             <tr>
-                <th>correo</th>
-                <td> <h:inputText id="correo" value="#{registroBean.correo}" /></td>
-            </tr>
-            <tr>
-                <th>username</th>
-                <td> <h:inputText id="username" value="#{registroBean.login}" required="true" requiredMessage="Campo obligatorio." /></td>
-            </tr>
-             <tr>
-                <th>contraseña</th>
-                <td> <h:inputText id="contraseña" value="#{registroBean.contraseña}" required="true" requiredMessage="Campo obligatorio." /></td>
-            </tr>
-             <tr>
-                <th>Cliente o Trabajador</th>
-                <td> <h:inputText id="tipo" value="#{registroBean.tipo}" required="true" requiredMessage="Campo obligatorio." /></td>
-            </tr>
-        </table>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="username" value="Username:" />
+            <h:inputText id="username" value="#{registroBean.username}" />
+
+            <h:outputLabel for="password" value="Password:" />
+            <h:inputSecret id="password" value="#{registroBean.password}" />
+
+            <h:outputLabel for="nombre" value="Nombre:" />
+            <h:inputText id="nombre" value="#{registroBean.nombre}" />
+
+            <h:outputLabel for="apellido" value="Apellido:" />
+            <h:inputText id="apellido" value="#{registroBean.apellido}" />
+
+            <h:commandButton value="Registrarse" action="#{registroBean.registrar()}" />
+
+            <h:outputText value="#{registroBean.mensajeError}" style="color:red" rendered="#{not empty registroBean.mensajeError}" />
+        </h:panelGrid>
     </h:form>
-    <form action="login.xhtml" actionlistener="#{registroBean.registrar}" method="post">
-    	<input type="submit" value="Registrarse" class="btn"> </input>
-    </form>
 </h:body>
 </html>

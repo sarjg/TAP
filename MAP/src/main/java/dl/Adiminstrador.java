@@ -26,7 +26,6 @@ public class Adiminstrador implements Serializable {
 	public Adiminstrador() {
 	}
 
-
 	public Adiminstrador(int idAdiminstradores, String apellido, String contraseña, String correo, String dni,
 			String login, String nombre, String tipo) {
 		super();
@@ -39,7 +38,6 @@ public class Adiminstrador implements Serializable {
 		this.nombre = nombre;
 		this.tipo = tipo;
 	}
-
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

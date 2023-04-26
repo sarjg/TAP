@@ -1,35 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
-    <title>Iniciar sesión</title>
+    <title>Login</title>
 </h:head>
-
 <h:body>
-	<h1>Iniciar sesión</h1>
     <h:form>
-      <table>
-            <tr>
-                <th>Usuario</th><th>Password</th>
-            </tr>
-            <tr>
-                <td>
-                     <h:inputText id="username" value="#{loginBean.username}" required="true" requiredMessage="Campo obligatorio." />
-                     <h:message for="username" style="color:red" />           
-                </td>
-                <td>
-                    <h:inputText id="password" value="#{loginBean.password}" required="true" requiredMessage="Campo obligatorio."/>
-                    <h:message for="password" style="color:red" />
-                </td>
-                                  
-                <td>
-                <h:commandButton action="#{loginBean.login}" id="submit" value="Ingresar" />            
-                </td>
-            </tr> 
-    </table>        
+        <h:panelGrid columns="2">
+            <h:outputLabel for="username" value="Username:" />
+            <h:inputText id="username" value="#{loginBean.username}" />
+
+            <h:outputLabel for="password" value="Password:" />
+            <h:inputSecret id="password" value="#{loginBean.password}" />
+
+            <h:commandButton value="Login" action="#{loginBean.login}" />
+
+            <h:outputText value="#{loginBean.errorMessage}" style="color:red" rendered="#{not empty loginBean.errorMessage}" />
+        </h:panelGrid>
     </h:form>
     
     <p>No tienes cuenta?</p>

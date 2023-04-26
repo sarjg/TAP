@@ -19,22 +19,6 @@ public class ProductoImp {
     @PersistenceContext
     EntityManager em;
 
-    public void crearProducto(Producto producto) {
-        em.persist(producto);
-    }
-
-    public void actualizarProducto(Producto producto) {
-        em.merge(producto);
-    }
-
-    public void eliminarProducto(Producto producto) {
-        em.remove(em.merge(producto));
-    }
-
-    public Producto obtenerProductoPorId(int id) {
-        return em.find(Producto.class, id);
-    }
-
     public Producto obtenerProductoPorNombre(String nombre) {
         Producto producto = null;
         try {
@@ -47,19 +31,6 @@ public class ProductoImp {
             producto = null;
         }
         return producto;
-    }
-
-
-    public List<Producto> obtenerProductosPorTipo(int idTipo) {
-        return em.createQuery("SELECT p FROM Producto p WHERE p.tipo.id = :idTipo", Producto.class)
-            .setParameter("idTipo", idTipo)
-            .getResultList();
-    }
-
-    public List<Producto> obtenerProductosPorSupermercado(int idSupermercado) {
-        return em.createQuery("SELECT p FROM Producto p WHERE p.supermercado.id = :idSupermercado", Producto.class)
-            .setParameter("idSupermercado", idSupermercado)
-            .getResultList();
     }
     
     public List<Producto> buscarProductosPorNombreYSupermercado(String nombre, Supermercado supermercado) {

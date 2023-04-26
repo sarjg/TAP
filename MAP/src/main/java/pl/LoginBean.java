@@ -1,31 +1,45 @@
 package pl;
 
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
-
 import bl.AdministradorImp;
+import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import java.io.IOException;
+import java.io.Serializable;
 
 @Named
-@RequestScoped
-public class LoginBean {
-
-	@EJB
-    private AdministradorImp admii;
-	
-    private String username;
+@SessionScoped
+public class LoginBean implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String username;
     private String password;
+    private String errorMessage;
 
-    public String login() {
-    	//ESTO NO ES LO QUE NOS INTERESA
-        if (username.equals("admin") && password.equals("1234")) {
-            return "seleccion_supermercado.xhtml";
+    @EJB
+    private AdministradorImp AdministradorImp;
+
+    public void login() throws IOException {
+        if (AdministradorImp.findByUsernameAndPassword(username, password) != null) { //si coincide el login con un usaurio existente
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
+            externalContext.getSessionMap().put("username", username); //guardan el nombre de usuario en la sesión HTTP del usuario 
+            externalContext.redirect("seleccion_supermercado.xhtml");
         } else {
-            return "login.xhtml";
+            setErrorMessage("Invalid username or password.");
         }
     }
 
-    // Getters y Setters
+    public void doLogout() throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.getSessionMap().remove("username");
+        externalContext.invalidateSession();
+        externalContext.redirect("login.xhtml");
+    }
+
     public String getUsername() {
         return username;
     }
@@ -37,9 +51,18 @@ public class LoginBean {
     public String getPassword() {
         return password;
     }
-
+    
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
 }
+
 

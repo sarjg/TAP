@@ -10,15 +10,16 @@
 </h:head>
 <h:body>
     <h1>Bienvenido!</h1>
-    <h2>Estas en el supermercado Eroski #{buscarProductoBean.nombreSupermercado}</h2>        
+    <h2>Estas en el supermercado Eroski #{seleccionSupermercadoBean.supermercadoSeleccionado}</h2>        
     <p>Introduzca el producto que desea buscar</p>
     <h:form>
         <h:panelGrid columns="2">
             <h:outputLabel value="Producto:" />
             <p:inputText id="producto" value="#{buscarProductoBean.nombreProducto}" required="true" requiredMessage="Debe introducir un producto" />
             <p:commandButton value="Buscar" action="#{buscarProductoBean.buscarProducto}" id="submit4" ajax="false" />
-      		<p:commandButton value="Volver" action="seleccion_supermercado" id="submit3" ajax="false"/>
+      		
        </h:panelGrid>
+       <p:commandButton value="Volver" action="seleccion_supermercado.xhtml" id="submit3" ajax="false"/>
     </h:form>    
     #{buscarProductoBean.warn}
     <br/>
@@ -58,6 +59,11 @@
             </script>
         </div>
     </h:panelGroup> 
+    <h:form>
+    	   <h:panelGrid>
+        <p:commandButton value="Cerrar sesion" action="#{loginBean.doLogout()}" id="submit6" ajax="false"/>
+           </h:panelGrid>
+    </h:form> 
 </h:body>
 </html>
 
