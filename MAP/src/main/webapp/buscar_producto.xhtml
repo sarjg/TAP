@@ -7,33 +7,31 @@
 
 <h:head>
     <title>Buscar Producto</title>
+        <link rel="stylesheet" href="estilo2.css"/>
+		<img src="logo.jpeg"  class="logo" />
 </h:head>
 <h:body>
-    <h1>Bienvenido!</h1>
-    <h2>Estas en el supermercado Eroski #{seleccionSupermercadoBean.supermercadoSeleccionado}</h2>        
-    <p>Introduzca el producto que desea buscar</p>
     <h:form>
-        <h:panelGrid columns="2">
-            <h:outputLabel value="Producto:" />
-            <p:inputText id="producto" value="#{buscarProductoBean.nombreProducto}" required="true" requiredMessage="Debe introducir un producto" />
+        <h:panelGrid columns="2" class="form-panel">
+  			<h:outputLabel value="Introduzca el producto que desea buscar:" /> <br />
+            <p:inputText id="producto" value="#{buscarProductoBean.nombreProducto}" required="true" requiredMessage="Debe introducir un producto" class="form-input"/>
+        </h:panelGrid>
             <p:commandButton value="Buscar" action="#{buscarProductoBean.buscarProducto}" id="submit4" ajax="false" />
-      		
-       </h:panelGrid>
-       <p:commandButton value="Volver" action="seleccion_supermercado.xhtml" id="submit3" ajax="false"/>
-    </h:form>    
-    #{buscarProductoBean.warn}
+      		<p:commandButton value="Volver" action="seleccion_supermercado.xhtml" id="submit3" ajax="false"/>
+    <br/>
     <br/>
     <h:panelGroup rendered="#{not empty buscarProductoBean.producto}">
-        <h:dataTable value="#{buscarProductoBean.producto}" var="producto">
-            <h:column>
-                <f:facet name="header">Nombre</f:facet>
-                #{producto.nombre}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Precio</f:facet>
-                #{producto.precio}
-            </h:column>
-        </h:dataTable>
+	  <h:dataTable value="#{buscarProductoBean.producto}" var="producto" styleClass="tabla">
+	    <h:column>
+	      <f:facet name="header">Nombre</f:facet>
+	      #{producto.nombre}
+	    </h:column>
+	    <h:column>
+	      <f:facet name="header">Precio (€)</f:facet>
+	      #{producto.precio}
+	    </h:column>
+	  </h:dataTable>    
+
         <div>
             <img id='theImg' src="Plano supermercado-Modelo.jpg" height="500"></img>
             <canvas id='myCanvas' width='536px' height='536px'></canvas>
@@ -59,10 +57,9 @@
             </script>
         </div>
     </h:panelGroup> 
-    <h:form>
-    	   <h:panelGrid>
-        <p:commandButton value="Cerrar sesion" action="#{loginBean.doLogout()}" id="submit6" ajax="false"/>
-           </h:panelGrid>
+  	   <div class="logout-container">
+        		<p:commandButton value="Cerrar sesion" action="#{loginBean.doLogout()}" id="submit7" ajax="false" class="logout-button"/>
+           </div>
     </h:form> 
 </h:body>
 </html>
