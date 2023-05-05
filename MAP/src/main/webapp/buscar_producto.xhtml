@@ -7,7 +7,7 @@
 
 <h:head>
     <title>Buscar Producto</title>
-        <link rel="stylesheet" href="estilo2.css"/>
+     	<link rel="stylesheet" href="estilo2.css"/>
 		<img src="logo.jpeg"  class="logo" />
 </h:head>
 <h:body>
@@ -16,48 +16,50 @@
   			<h:outputLabel value="Introduzca el producto que desea buscar:" /> <br />
             <p:inputText id="producto" value="#{buscarProductoBean.nombreProducto}" required="true" requiredMessage="Debe introducir un producto" class="form-input"/>
         </h:panelGrid>
-            <p:commandButton value="Buscar" action="#{buscarProductoBean.buscarProducto}" id="submit4" ajax="false" />
-      		<p:commandButton value="Volver" action="seleccion_supermercado.xhtml" id="submit3" ajax="false"/>
-    <br/>
-    <br/>
-    <h:panelGroup rendered="#{not empty buscarProductoBean.producto}">
-	  <h:dataTable value="#{buscarProductoBean.producto}" var="producto" styleClass="tabla">
-	    <h:column>
-	      <f:facet name="header">Nombre</f:facet>
-	      #{producto.nombre}
-	    </h:column>
-	    <h:column>
-	      <f:facet name="header">Precio (€)</f:facet>
-	      #{producto.precio}
-	    </h:column>
-	  </h:dataTable>    
-
-        <div>
-            <img id='theImg' src="Plano supermercado-Modelo.jpg" height="500"></img>
-            <canvas id='myCanvas' width='536px' height='536px'></canvas>
-            <script>
-                function Draw() {
-                    var img = document.getElementById("theImg");
-                    var cnvs = document.getElementById("myCanvas");
-                    cnvs.style.position = "absolute";
-                    cnvs.style.left = img.offsetLeft + "px";
-                    cnvs.style.top = img.offsetTop + "px";
-
-                    var ctx = cnvs.getContext("2d");
-                    ctx.beginPath();            
-                    ctx.arc(#{buscarProductoBean.pasillo}, #{buscarProductoBean.estanteria}, 10, 0, 2 * Math.PI); // x, y y radio
-                   // ctx.arc(500, 375, 10, 0, 2 * Math.PI); // x, y y radio
-                    ctx.lineWidth = 2;
-                    ctx.strokeStyle = '#5c92ff';
-                    ctx.stroke();
-                    ctx.fillStyle = 'rgba(0, 150, 255, 0.5)';
-                    ctx.fill();
-                }
-                Draw();
-            </script>
-        </div>
-    </h:panelGroup> 
-  	   <div class="logout-container">
+            <p:commandButton value="Buscar" action="#{buscarProductoBean.buscarProducto()}" id="submit4" ajax="false" />
+      		<p:commandButton value="Volver" action="seleccion_supermercado" id="submit3" ajax="false"/>
+	    <br/>
+	    <br/>
+	    <h:panelGroup rendered="#{not empty buscarProductoBean.producto}">
+		  <h:dataTable value="#{buscarProductoBean.producto}" var="producto" styleClass="tabla">
+		    <h:column>
+		      <f:facet name="header">Nombre</f:facet>
+		      #{producto.nombre}
+		    </h:column>
+		    <h:column>
+		      <f:facet name="header">Precio (€)</f:facet>
+		      #{producto.precio}
+		    </h:column>
+		  </h:dataTable>    
+	
+	        <div>
+	            <img id='theImg' src="Plano supermercado-Modelo.jpg" width='900' height='700'/>
+	            <canvas id='myCanvas' width='736' height='736'></canvas>
+	            <script>
+	                function Draw() {
+	                    var img = document.getElementById("theImg");
+	                    var cnvs = document.getElementById("myCanvas");
+	                    cnvs.style.position = "absolute";
+	                    cnvs.style.left = img.offsetLeft + "px";
+	                    cnvs.style.top = img.offsetTop + "px";
+	
+	                    var ctx = cnvs.getContext("2d");
+	                    ctx.beginPath();      
+	                    ctx.arc(#{buscarProductoBean.pasillo}, #{buscarProductoBean.estanteria}, 10, 0, 2 * Math.PI); // x, y y radio
+	                    //ctx.arc(620, 620, 10, 0, 2 * Math.PI); // x, y y radio
+	                    ctx.lineWidth = 2;
+	                    ctx.strokeStyle = '#5c92ff';
+	                    ctx.stroke();
+	                    ctx.fillStyle = 'rgba(0, 150, 255, 0.5)';
+	                    ctx.fill();
+	                    console.log("x="+ x);
+	                    console.log("y="+ y);
+	                }
+	                Draw();
+	            </script>
+	        </div>
+	    </h:panelGroup> 
+	  	   <div class="logout-container">
         		<p:commandButton value="Cerrar sesion" action="#{loginBean.doLogout()}" id="submit7" ajax="false" class="logout-button"/>
            </div>
     </h:form> 

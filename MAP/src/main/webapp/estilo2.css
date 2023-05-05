@@ -13,7 +13,7 @@ html {
 
 /* Estilo para el formulario */
 form {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 10px;
@@ -92,13 +92,8 @@ form input[type="submit"] {
   margin-bottom: 20px;
 }
 
-form input[type="submit"]:hover {
-  background-color: #3e8e41;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  margin: 0;
-}
+
+
 .logout-container{
 	position: absolute;
 	top: 0;

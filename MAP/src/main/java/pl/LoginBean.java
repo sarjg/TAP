@@ -23,21 +23,24 @@ public class LoginBean implements Serializable {
     @EJB
     private AdministradorImp AdministradorImp;
 
-    public void login() throws IOException {
+    public String login() throws IOException {
         if (AdministradorImp.findByUsernameAndPassword(username, password) != null) { //si coincide el login con un usaurio existente
-            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
-            externalContext.getSessionMap().put("username", username); //guardan el nombre de usuario en la sesión HTTP del usuario 
-            externalContext.redirect("seleccion_supermercado.xhtml");
+            //ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
+            //externalContext.getSessionMap().put("username", username); //guardan el nombre de usuario en la sesión HTTP del usuario 
+            //externalContext.redirect("seleccion_supermercado.xhtml");
+        	return "seleccion_supermercado";
         } else {
             setErrorMessage("Invalid username or password.");
+            return null;
         }
     }
 
-    public void doLogout() throws IOException {
+    public String doLogout() throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        externalContext.getSessionMap().remove("username");
+        //externalContext.getSessionMap().remove("username");
         externalContext.invalidateSession();
-        externalContext.redirect("login.xhtml");
+        //externalContext.redirect("login.xhtml");
+        return "login.xhtml";
     }
 
     public String getUsername() {
